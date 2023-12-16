@@ -24,7 +24,7 @@
         .section h2 {
             font-size: 1.5em;
             margin-bottom: 10px;
-            position: relative; /* Needed for label editing */
+            position: relative;
         }
 
         .section h2 input {
@@ -61,17 +61,26 @@
 </head>
 <body>
     <div class="section">
-        <h2><input type="text" value="Section 1"></h2>
+        <h2>
+            <input type="text" value="Section 1">
+            Section 1
+        </h2>
         <p>Click anywhere here to increase the counter.</p>
         <span class="counter">0</span>
     </div>
     <div class="section">
-        <h2><input type="text" value="Section 2"></h2>
+        <h2>
+            <input type="text" value="Section 2">
+            Section 2
+        </h2>
         <p>Tap anywhere here to increase the counter.</p>
         <span class="counter">0</span>
     </div>
     <div class="section">
-        <h2><input type="text" value="Section 3"></h2>
+        <h2>
+            <input type="text" value="Section 3">
+            Section 3
+        </h2>
         <p>Click or touch anywhere to increase the counter.</p>
         <span class="counter">0</span>
     </div>
@@ -96,7 +105,7 @@
 
         for (let label of labels) {
             label.addEventListener('blur', () => {
-                label.previousElementSibling.textContent = label.value;
+                label.nextElementSibling.textContent = label.value;
             });
         }
     </script>
