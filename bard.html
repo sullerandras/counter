@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3 Sections with Counters & Editable Labels</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        .section {
+            flex: 1;
+            background-color: #ddd;
+            padding: 20px;
+            border: 1px solid #ccc;
+            margin: 10px;
+            position: relative;
+        }
+
+        .section h2 {
+            font-size: 1.5em;
+            margin-bottom: 10px;
+            position: relative;
+        }
+
+        .section h2 input {
+            display: none; /* Initially hidden */
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 5px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background-color: #fff;
+            z-index: 1; /* Overlays other elements */
+        }
+
+        .section h2:active input,
+        .section h2:focus-within input {
+            display: block; /* Show input on tap/focus */
+        }
+
+        .counter {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            font-weight: bold;
+            font-size: 3em;
+        }
+
+        @media only screen and (max-width: 768px) {
+            .section {
+                margin-bottom: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="section">
+        <h2>
+            <input type="text" value="Section 1">
+            Section 1
+        </h2>
+        <p>Click or tap anywhere here to increase the counter.</p>
+        <span class="counter">0</span>
+    </div>
+    <div class="section">
+        <h2>
+            <input type="text" value="Section 2">
+            Section 2
+        </h2>
+        <p>Click or tap anywhere here to increase the counter.</p>
+        <span class="counter">0</span>
+    </div>
+    <div class="section">
+        <h2>
+            <input type="text" value="Section 3">
+            Section 3
+        </h2>
+        <p>Click or tap anywhere here to increase the counter.</p>
+        <span class="counter">0</span>
+    </div>
+
+    <script>
+        const counters = document.querySelectorAll('.counter');
+        const labels = document.querySelectorAll('h2 input');
+
+        // Mobile keyboard trigger (optional)
+        function showMobileKeyboard() {
+            const input = document.querySelector('h2 input:focus');
+            if (input) {
+                input.click(); // Triggers keyboard appearance
+            }
+        }
+
+        for (let label of labels) {
+            label.addEventListener('change', () => {
+                label.nextElementSibling.textContent = label.value;
+            });
+
+            label.addEventListener('touchstart', () => {
+                label.focus();
+            });
+
+            label.addEventListener('focus', () => {
+                showMobileKeyboard(); // Optional keyboard trigger
+            });
+        }
+
+        for (let i = 0; i < counters.length; i++) {
+            counters[i].parentElement.addEventListener('click', () => {
+                if (event.target !== counters[i]) {
+                    counters[i].textContent = parseInt(counters[i].textContent) + 1;
+                }
+            });
+
+            counters[i].parentElement.addEventListener('touchstart', (event) => {
+                event.preventDefault(); // Prevent default touch behavior
+                if (event.target !== counters[i]) {
+                    counters[i].textContent = parseInt(counters[i].textContent) + 1;
+                }
+            });
+        }
+    </script>
+</body>
+</html>

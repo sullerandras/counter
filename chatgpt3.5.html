@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+        }
+
+        .section {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            cursor: pointer;
+        }
+
+        .counter {
+            font-size: 2em;
+            margin-top: 10px;
+        }
+    </style>
+    <script>
+        function updateCounter(sectionId) {
+            const counterElement = document.getElementById(`${sectionId}-counter`);
+            let count = parseInt(counterElement.innerText);
+            counterElement.innerText = count + 1;
+        }
+    </script>
+</head>
+<body>
+    <div class="section" id="section1" onclick="updateCounter('section1')">
+        <label>Section 1</label>
+        <div class="counter" id="section1-counter">0</div>
+    </div>
+
+    <div class="section" id="section2" onclick="updateCounter('section2')">
+        <label>Section 2</label>
+        <div class="counter" id="section2-counter">0</div>
+    </div>
+
+    <div class="section" id="section3" onclick="updateCounter('section3')">
+        <label>Section 3</label>
+        <div class="counter" id="section3-counter">0</div>
+    </div>
+</body>
+</html>
