@@ -38,24 +38,23 @@
         label:hover {
             text-decoration: underline;
         }
+
+        #editModeCheckbox {
+            margin-top: 10px;
+            font-size: 1.2em;
+        }
     </style>
     <script>
-        let lastTapTime = 0;
+        let editMode = false;
 
         function updateCounter(sectionId) {
-            const currentTime = new Date().getTime();
-            const elapsedTime = currentTime - lastTapTime;
-
-            // If the time between taps is less than 300 milliseconds, consider it a double-tap
-            if (elapsedTime < 300) {
+            if (editMode) {
                 editLabel(sectionId);
             } else {
                 const counterElement = document.getElementById(`${sectionId}-counter`);
                 let count = parseInt(counterElement.innerText);
                 counterElement.innerText = count + 1;
             }
-
-            lastTapTime = currentTime;
         }
 
         function editLabel(sectionId) {
@@ -64,6 +63,10 @@
             if (newLabel !== null) {
                 labelElement.innerText = newLabel;
             }
+        }
+
+        function toggleEditMode() {
+            editMode = !editMode;
         }
     </script>
 </head>
@@ -82,5 +85,8 @@
         <label id="section3-label">Section 3</label>
         <div class="counter" id="section3-counter">0</div>
     </div>
+
+    <input type="checkbox" id="editModeCheckbox" onclick="toggleEditMode()">
+    <label for="editModeCheckbox">Enable Label Editing</label>
 </body>
 </html>
