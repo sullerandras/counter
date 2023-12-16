@@ -40,8 +40,9 @@
             z-index: 1; /* Overlays other elements */
         }
 
-        .section h2:hover input {
-            display: block; /* Show on hover */
+        .section h2:active input,
+        .section h2:focus-within input {
+            display: block; /* Show input on tap/focus */
         }
 
         .counter {
@@ -49,7 +50,7 @@
             top: 10px;
             right: 10px;
             font-weight: bold;
-            font-size: 3em; /* Increased size */
+            font-size: 3em;
         }
 
         @media only screen and (max-width: 768px) {
@@ -65,7 +66,7 @@
             <input type="text" value="Section 1">
             Section 1
         </h2>
-        <p>Click anywhere here to increase the counter.</p>
+        <p>Click or tap anywhere here to increase the counter.</p>
         <span class="counter">0</span>
     </div>
     <div class="section">
@@ -73,7 +74,7 @@
             <input type="text" value="Section 2">
             Section 2
         </h2>
-        <p>Tap anywhere here to increase the counter.</p>
+        <p>Click or tap anywhere here to increase the counter.</p>
         <span class="counter">0</span>
     </div>
     <div class="section">
@@ -81,13 +82,35 @@
             <input type="text" value="Section 3">
             Section 3
         </h2>
-        <p>Click or touch anywhere to increase the counter.</p>
+        <p>Click or tap anywhere here to increase the counter.</p>
         <span class="counter">0</span>
     </div>
 
     <script>
         const counters = document.querySelectorAll('.counter');
         const labels = document.querySelectorAll('h2 input');
+
+        // Mobile keyboard trigger (optional)
+        function showMobileKeyboard() {
+            const input = document.querySelector('h2 input:focus');
+            if (input) {
+                input.click(); // Triggers keyboard appearance
+            }
+        }
+
+        for (let label of labels) {
+            label.addEventListener('change', () => {
+                label.nextElementSibling.textContent = label.value;
+            });
+
+            label.addEventListener('touchstart', () => {
+                label.focus();
+            });
+
+            label.addEventListener('focus', () => {
+                showMobileKeyboard(); // Optional keyboard trigger
+            });
+        }
 
         for (let i = 0; i < counters.length; i++) {
             counters[i].parentElement.addEventListener('click', () => {
@@ -97,16 +120,10 @@
             });
 
             counters[i].parentElement.addEventListener('touchstart', (event) => {
-                event.preventDefault(); // Prevents default touch behavior
+                event.preventDefault(); // Prevent default touch behavior
                 if (event.target !== counters[i]) {
                     counters[i].textContent = parseInt(counters[i].textContent) + 1;
                 }
-            });
-        }
-
-        for (let label of labels) {
-            label.addEventListener('change', () => {
-                label.nextElementSibling.textContent = label.value;
             });
         }
     </script>
