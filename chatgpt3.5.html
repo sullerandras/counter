@@ -21,11 +21,22 @@
             align-items: center;
             text-align: center;
             cursor: pointer;
+            border: 2px dashed #333;
+            margin: 10px;
         }
 
         .counter {
-            font-size: 2em;
-            margin-top: 10px;
+            font-size: 3em;
+            margin-top: 15px;
+        }
+
+        label {
+            cursor: pointer;
+            font-size: 1.5em;
+        }
+
+        label:hover {
+            text-decoration: underline;
         }
     </style>
     <script>
@@ -34,21 +45,29 @@
             let count = parseInt(counterElement.innerText);
             counterElement.innerText = count + 1;
         }
+
+        function editLabel(sectionId) {
+            const labelElement = document.getElementById(`${sectionId}-label`);
+            const newLabel = prompt("Enter a new label:", labelElement.innerText);
+            if (newLabel !== null) {
+                labelElement.innerText = newLabel;
+            }
+        }
     </script>
 </head>
 <body>
     <div class="section" id="section1" onclick="updateCounter('section1')">
-        <label>Section 1</label>
+        <label id="section1-label" onclick="editLabel('section1')">Section 1</label>
         <div class="counter" id="section1-counter">0</div>
     </div>
 
     <div class="section" id="section2" onclick="updateCounter('section2')">
-        <label>Section 2</label>
+        <label id="section2-label" onclick="editLabel('section2')">Section 2</label>
         <div class="counter" id="section2-counter">0</div>
     </div>
 
     <div class="section" id="section3" onclick="updateCounter('section3')">
-        <label>Section 3</label>
+        <label id="section3-label" onclick="editLabel('section3')">Section 3</label>
         <div class="counter" id="section3-counter">0</div>
     </div>
 </body>
