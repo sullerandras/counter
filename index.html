@@ -97,6 +97,7 @@
             });
 
             counters[i].parentElement.addEventListener('touchstart', (event) => {
+                event.preventDefault(); // Prevents default touch behavior
                 if (event.target !== counters[i]) {
                     counters[i].textContent = parseInt(counters[i].textContent) + 1;
                 }
@@ -104,7 +105,7 @@
         }
 
         for (let label of labels) {
-            label.addEventListener('blur', () => {
+            label.addEventListener('change', () => {
                 label.nextElementSibling.textContent = label.value;
             });
         }
