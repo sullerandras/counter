@@ -40,10 +40,22 @@
         }
     </style>
     <script>
+        let lastTapTime = 0;
+
         function updateCounter(sectionId) {
-            const counterElement = document.getElementById(`${sectionId}-counter`);
-            let count = parseInt(counterElement.innerText);
-            counterElement.innerText = count + 1;
+            const currentTime = new Date().getTime();
+            const elapsedTime = currentTime - lastTapTime;
+
+            // If the time between taps is less than 300 milliseconds, consider it a double-tap
+            if (elapsedTime < 300) {
+                editLabel(sectionId);
+            } else {
+                const counterElement = document.getElementById(`${sectionId}-counter`);
+                let count = parseInt(counterElement.innerText);
+                counterElement.innerText = count + 1;
+            }
+
+            lastTapTime = currentTime;
         }
 
         function editLabel(sectionId) {
@@ -57,17 +69,17 @@
 </head>
 <body>
     <div class="section" id="section1" onclick="updateCounter('section1')">
-        <label id="section1-label" onclick="editLabel('section1')">Section 1</label>
+        <label id="section1-label">Section 1</label>
         <div class="counter" id="section1-counter">0</div>
     </div>
 
     <div class="section" id="section2" onclick="updateCounter('section2')">
-        <label id="section2-label" onclick="editLabel('section2')">Section 2</label>
+        <label id="section2-label">Section 2</label>
         <div class="counter" id="section2-counter">0</div>
     </div>
 
     <div class="section" id="section3" onclick="updateCounter('section3')">
-        <label id="section3-label" onclick="editLabel('section3')">Section 3</label>
+        <label id="section3-label">Section 3</label>
         <div class="counter" id="section3-counter">0</div>
     </div>
 </body>
