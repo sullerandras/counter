@@ -1,0 +1,13 @@
+.section {
+  width: 100%;
+  padding: 20px;
+  box-sizing: border-box;
+  margin-bottom: 20px;
+}
+
+@media (min-width: 600px) {
+  .section {
+      width: 33.33%;
+      float: left;
+  }
+}
