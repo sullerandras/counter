@@ -19,6 +19,7 @@
     justify-content: center;
     font-size: 4rem; /* increase counter size */
     color: white;
+    position: relative; /* add relative position to section */
   }
 
   .section:nth-child(1) {
@@ -34,36 +35,35 @@
   }
 
   .label {
-    position: absolute;
-    top: 0;
+    position: absolute; /* change position to absolute */
+    top: 0; /* move label to top left corner */
     left: 0;
+    transform: none; /* remove transform */
     padding: 0.5rem;
-    font-size: 1rem;
+    font-size: 1.5rem; /* increase label size */
     color: black;
+    border: 1px solid black; /* add border to label */
   }
 
-  /* add media query to adjust label position for smaller screens */
-  @media (max-width: 600px) {
-    .label {
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-    }
+  /* add css to make label editable */
+  .label:focus {
+    outline: none;
+    background-color: white;
   }
 </style>
 </head>
 <body>
 <div class="container">
   <div class="section" onclick="increment(this)">
-    <div class="label">Section 1</div>
+    <div class="label" contenteditable="true">Section 1</div> <!-- add contenteditable attribute to label -->
     <div class="counter">0</div>
   </div>
   <div class="section" onclick="increment(this)">
-    <div class="label">Section 2</div>
+    <div class="label" contenteditable="true">Section 2</div>
     <div class="counter">0</div>
   </div>
   <div class="section" onclick="increment(this)">
-    <div class="label">Section 3</div>
+    <div class="label" contenteditable="true">Section 3</div>
     <div class="counter">0</div>
   </div>
 </div>
